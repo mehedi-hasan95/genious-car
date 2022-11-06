@@ -4,6 +4,8 @@ import app from '../Firebase/Firebase.init';
 import { createContext } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const auth = getAuth(app);
 export const AuthContext = createContext();
@@ -34,14 +36,14 @@ const AuthProvider = ({ children }) => {
     }
 
     // After user Change
-    useEffect( () => {
-        const unsubscribe = onAuthStateChanged(auth, currentUser =>{
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
         })
         return () => {
             return unsubscribe;
         }
-    },[])
+    }, [])
 
 
     const authInfo = {
@@ -50,6 +52,7 @@ const AuthProvider = ({ children }) => {
     return (
         <AuthContext.Provider value={authInfo}>
             {children}
+            <ToastContainer position="top-right" />
         </AuthContext.Provider>
     );
 };

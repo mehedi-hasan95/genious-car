@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const SingleService = ({service}) => {
-    const {title, img, price} = service;
+    const {_id, title, img, price} = service;
     return (
         <div className='border rounded-xl p-5'>
             <img src={img} alt="" />
@@ -11,7 +12,7 @@ const SingleService = ({service}) => {
                 </h2>
                 <div className='flex justify-between'>
                     <h4 className='text-xl text-custom-orange font-semibold'>Price: ${price}</h4>
-                    <button className='text-2xl text-custom-orange'>Get Details</button>
+                    <Link to={`/services/${_id}`} className='text-2xl text-custom-orange'>Get Details</Link>
                 </div>
             </div>
         </div>
