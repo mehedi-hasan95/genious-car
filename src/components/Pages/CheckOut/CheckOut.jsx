@@ -12,14 +12,13 @@ const CheckOut = () => {
         const email = form.email.value;
         const phone = form.phone.value;
         const message = form.message.value;
-        form.reset();
 
         const order = {
-            service: _id, title, name, email, phone, message
+            service: _id, title, name, email, phone, message, price
         }
 
         fetch('http://localhost:5000/orders', {
-            method: 'POST', // or 'PUT'
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -29,6 +28,7 @@ const CheckOut = () => {
             .then((data) => {
                 if(data.acknowledged) {
                     toast.success('You have sucessfully added this product', {autoClose: 500});
+                    form.reset();
                 }
             })
             .catch((error) => {

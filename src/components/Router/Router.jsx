@@ -5,7 +5,9 @@ import Error from "../Pages/Error/Error";
 import Home from "../Pages/Home/Home";
 import ServiceDetails from "../Pages/Home/service/ServiceDetails";
 import Login from "../Pages/Login/Login";
+import Orders from "../Pages/Orders/Orders";
 import Register from "../Pages/Register/Register";
+import PrivetRoute from "./PrivetRoute";
 
 export const router = createBrowserRouter ([
     {path: '/', element: <Main></Main>,
@@ -17,10 +19,11 @@ export const router = createBrowserRouter ([
         {path: 'services/:id', element: <ServiceDetails></ServiceDetails>,
         loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`)
     },
-        {path: 'checkout/:id', element: <CheckOut></CheckOut>,
+        {path: 'checkout/:id', element: <PrivetRoute><CheckOut></CheckOut></PrivetRoute>,
         loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`)
     },
-        {path: '*', element: <Error></Error>}
+    {path: 'orders', element: <PrivetRoute><Orders></Orders></PrivetRoute>},
+    {path: '*', element: <Error></Error>}
     ]
 }
 ])

@@ -1,11 +1,14 @@
 import React from 'react';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import loginImg from '../../../assets/images/login/login.svg'
 import { AuthContext } from '../../Context/AuthProvider';
 
 const Login = () => {
-    const {loginUserWithEmail} = useContext(AuthContext);
+    const { loginUserWithEmail } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     const handleLogin = e => {
         e.preventDefault();
@@ -16,14 +19,14 @@ const Login = () => {
 
         // Login User
         loginUserWithEmail(email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            console.log(user);
-          })
-          .catch((error) => {
-            const errorMessage = error.message;
-            console.log(errorMessage);
-          });
+            .then((userCredential) => {
+                const user = userCredential.user;
+                navigate(from, { replace: true });
+            })
+            .catch((error) => {
+                const errorMessage = error.message;
+                console.log(errorMessage);
+            });
     }
     return (
         <div className='container mx-auto grid grid-cols-1 md:grid-cols-2 py-10'>

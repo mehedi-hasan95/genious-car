@@ -6,16 +6,23 @@ import { AuthContext } from '../../Context/AuthProvider';
 
 const NavMenu = () => {
     const {user, logOut} = useContext(AuthContext);
+    console.log(user);
     const menu = <>
         <li><Link className=' text-dark-02 text-lg font-semibold' to='/home'>Home</Link></li>
         <li><Link className=' text-dark-02 text-lg font-semibold' to='/about'>About</Link></li>
         <li><Link className=' text-dark-02 text-lg font-semibold' to='/services'>Services</Link></li>
+        <li><Link className=' text-dark-02 text-lg font-semibold' to='/orders'>Orders</Link></li>
         <li>
             {
                 user?.uid ?
                 <Link onClick={logOut} className=' text-dark-02 text-lg font-semibold'>Log Out</Link>
                 :
                 <Link className=' text-dark-02 text-lg font-semibold' to='/login'>Login</Link>
+            }
+        </li>
+        <li>
+            {
+                user?.uid && <Link className=' text-dark-02 text-lg font-semibold'>{user?.email}</Link> 
             }
         </li>
     </>
