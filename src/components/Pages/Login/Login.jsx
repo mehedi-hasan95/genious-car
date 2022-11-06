@@ -21,7 +21,27 @@ const Login = () => {
         loginUserWithEmail(email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                navigate(from, { replace: true });
+
+                const currentUser = {
+                    email: user.email,
+                }
+
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST', 
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(currentUser),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        localStorage.setItem('geniousToken', data.token);
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+
+                // navigate(from, { replace: true });
             })
             .catch((error) => {
                 const errorMessage = error.message;

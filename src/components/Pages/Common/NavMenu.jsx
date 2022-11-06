@@ -6,7 +6,6 @@ import { AuthContext } from '../../Context/AuthProvider';
 
 const NavMenu = () => {
     const {user, logOut} = useContext(AuthContext);
-    console.log(user);
     const menu = <>
         <li><Link className=' text-dark-02 text-lg font-semibold' to='/home'>Home</Link></li>
         <li><Link className=' text-dark-02 text-lg font-semibold' to='/about'>About</Link></li>
