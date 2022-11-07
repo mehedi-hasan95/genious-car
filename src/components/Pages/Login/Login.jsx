@@ -36,12 +36,11 @@ const Login = () => {
                     .then((response) => response.json())
                     .then((data) => {
                         localStorage.setItem('geniousToken', data.token);
+                        navigate(from, { replace: true });
                     })
                     .catch((error) => {
                         console.error('Error:', error);
                     });
-
-                // navigate(from, { replace: true });
             })
             .catch((error) => {
                 const errorMessage = error.message;
