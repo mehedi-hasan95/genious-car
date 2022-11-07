@@ -3,7 +3,7 @@ import { AuthContext } from '../../Context/AuthProvider';
 import OrdersItem from './OrdersItem';
 
 const Orders = () => {
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
@@ -12,7 +12,12 @@ const Orders = () => {
                 authorization: `Bearar ${localStorage.getItem('geniousToken')}`
             }
         })
-            .then(res => res.json())
+            .then(res => {
+                if(res.status === 401 || res.status === 403) {
+                    logOut();
+                }
+                return res.json()
+            })
             .then(data => setOrders(data))
     }, [user?.email])
 
@@ -22,7 +27,8 @@ const Orders = () => {
             fetch(`http://localhost:5000/orders/${id}`, {
                 method: "DELETE"
             })
-            .then (res => res.json())
+            .then (res => {res.json()
+            })
             .then (data => {
                 console.log(data);
                 if(data.deletedCount) {
