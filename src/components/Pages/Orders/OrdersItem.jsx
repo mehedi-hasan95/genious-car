@@ -6,7 +6,7 @@ const OrdersItem = ({order, handleDelete}) => {
     const [orderImg, setOrderImg] = useState([])
 
     useEffect( () => {
-        fetch(`http://localhost:5000/services/${service}`)
+        fetch(`https://genious-car-server-phi.vercel.app/services/${service}`)
         .then (res => res.json())
         .then (data => setOrderImg(data))
     }, [service])

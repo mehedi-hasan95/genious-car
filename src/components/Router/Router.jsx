@@ -17,10 +17,10 @@ export const router = createBrowserRouter ([
         {path: 'login', element: <Login></Login>},
         {path: 'register', element: <Register></Register>},
         {path: 'services/:id', element: <ServiceDetails></ServiceDetails>,
-        loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`)
+        loader: ({params}) => fetch(`https://genious-car-server-phi.vercel.app/services/${params.id}`)
     },
         {path: 'checkout/:id', element: <PrivetRoute><CheckOut></CheckOut></PrivetRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`)
+        loader: ({params}) => fetch(`https://genious-car-server-phi.vercel.app/services/${params.id}`)
     },
     {path: 'orders', element: <PrivetRoute><Orders></Orders></PrivetRoute>},
     {path: '*', element: <Error></Error>}

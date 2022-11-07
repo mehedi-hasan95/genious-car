@@ -7,7 +7,7 @@ const Orders = () => {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/orders?email=${user?.email}`, {
+        fetch(`https://genious-car-server-phi.vercel.app/orders?email=${user?.email}`, {
             headers: {
                 authorization: `Bearar ${localStorage.getItem('geniousToken')}`
             }
@@ -24,7 +24,7 @@ const Orders = () => {
     const handleDelete = id => {
         const proceed = window.confirm("Do you want to delete this Item?");
         if(proceed) {
-            fetch(`http://localhost:5000/orders/${id}`, {
+            fetch(`https://genious-car-server-phi.vercel.app/orders/${id}`, {
                 method: "DELETE"
             })
             .then (res => {res.json()
